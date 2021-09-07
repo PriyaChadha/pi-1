@@ -5,7 +5,6 @@ const Constraint = Matter.Constraint;
 
 var engine,world;
 var backgroundImg
-var boats = [];
 
 function preload() {
   backgroundImg=loadImage("assets/background.gif")
@@ -40,9 +39,10 @@ function draw() {
   background(backgroundImg);  
   Engine.update(engine)
   rectMode(CENTER)
-  showBoats();
+  
   cannon.display()
-  //console.log(cannon.angle)
+  console.log(cannon.angle)
+  
   fill("brown")
   rect(ground.position.x,ground.position.x,1200,100)
 
@@ -53,37 +53,5 @@ function draw() {
   image(cannonBase,130,140,220,170)
   image(towerImg, 120,350, 140,320)  
   pop()
-
   
-  
-}
-
-function showBoats() {
-  if (boats.length > 0) {
-    if (
-      boats[boats.length - 1] === undefined ||
-      boats[boats.length - 1].body.position.x < width - 300
-    ) {
-     
-      var boat = new Boat(width, 300, 170, 170);
-
-      boats.push(boat);
-    }
-
-    for (var i = 0; i < boats.length; i++) {
-      if (boats[i]) {
-        Matter.Body.setVelocity(boats[i].body, {
-          x: -0.9,
-          y: 0
-        });
-
-        boats[i].display();
-      } else {
-        boats[i];
-      }
-    }
-  } else {
-    var boat = new Boat(width, 300, 170, 170, -60);
-    boats.push(boat);
-  }
 }
